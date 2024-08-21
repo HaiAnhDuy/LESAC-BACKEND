@@ -3,7 +3,8 @@ import bcrypt from 'bcryptjs';
 // import { raw } from 'body-parser';
 import _ from 'lodash';
 import { and, where } from 'sequelize';
-import EmailService from './EmailService.js'
+import EmailService from './EmailService'
+import SimpleSendEmail from './EmailService.js'
 require('dotenv').config();
 import { v4 as uuidv4 } from 'uuid';
 let handleLoginService = (email, password) => {
@@ -1377,7 +1378,7 @@ let PatientBookingAppointmentService = (data) => {
 
             let token = uuidv4();
             let url_mail = await MakeUrlEmail(data_checkout[0].id_user, token)
-            await EmailService.SimpleSendEmail({
+            await SimpleSendEmail({
                 data_mail: data_checkout,
                 url_verify: url_mail,
             })
